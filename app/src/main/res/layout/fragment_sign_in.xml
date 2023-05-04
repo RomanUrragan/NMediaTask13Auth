@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SignInFragment">
+
+
+    <TextView
+        android:layout_marginBottom="8dp"
+        android:id="@+id/text_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.41000003" />
+
+    <EditText
+        android:id="@+id/edit_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/login"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/text_welcome"
+        app:layout_constraintStart_toStartOf="@+id/text_welcome"
+        app:layout_constraintTop_toBottomOf="@+id/text_welcome" />
+
+    <EditText
+        android:layout_marginTop="8dp"
+        android:id="@+id/edit_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/edit_login"
+        app:layout_constraintStart_toStartOf="@+id/edit_login"
+        app:layout_constraintTop_toBottomOf="@+id/edit_login" />
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:id="@+id/textError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:visibility="gone"
+        android:textColor="@color/red"
+        app:layout_constraintEnd_toEndOf="@+id/edit_password"
+        app:layout_constraintStart_toStartOf="@+id/edit_password"
+        app:layout_constraintTop_toBottomOf="@+id/edit_password" />
+
+    <Button
+        android:id="@+id/button_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/sign_in"
+        app:layout_constraintEnd_toEndOf="@+id/edit_password"
+        app:layout_constraintStart_toStartOf="@+id/edit_password"
+        app:layout_constraintTop_toBottomOf="@+id/textError" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
