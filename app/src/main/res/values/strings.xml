@@ -42,4 +42,6 @@
     <string name="name">Name</string>
     <string name="password_confirm">Password Confirm</string>
     <string name="passwords_dont_match">Passwords don\'t match</string>
+    <string name="incorrectLoginOrPassword">Incorrect login or password</string>
+    <string name="loginIsTaken">Login is already taken</string>
 </resources>

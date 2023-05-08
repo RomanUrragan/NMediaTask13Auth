@@ -52,8 +52,6 @@ class PostRepositoryImpl(private val dao: PostDao) : PostRepository {
             return response.body() ?: throw ApiError(response.code(), response.message())
         } catch (e: IOException) {
             throw NetworkError
-        } catch (e: Exception) {
-            throw UnknownError
         }
     }
 
@@ -64,10 +62,9 @@ class PostRepositoryImpl(private val dao: PostDao) : PostRepository {
                 throw ApiError(response.code(), response.message())
             }
             return response.body() ?: throw ApiError(response.code(), response.message())
-        } catch (e: IOException) {
+        }
+        catch (e: IOException) {
             throw NetworkError
-        } catch (e: Exception) {
-            throw UnknownError
         }
     }
 
@@ -122,8 +119,6 @@ class PostRepositoryImpl(private val dao: PostDao) : PostRepository {
             throw e
         } catch (e: IOException) {
             throw NetworkError
-        } catch (e: Exception) {
-            throw UnknownError
         }
     }
 
@@ -148,8 +143,6 @@ class PostRepositoryImpl(private val dao: PostDao) : PostRepository {
             return response.body() ?: throw ApiError(response.code(), response.message())
         } catch (e: IOException) {
             throw NetworkError
-        } catch (e: Exception) {
-            throw UnknownError
         }
     }
 

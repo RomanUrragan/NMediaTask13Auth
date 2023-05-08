@@ -19,6 +19,7 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.auth.AppAuth
 import ru.netology.nmedia.databinding.FragmentSignUpBinding
 import ru.netology.nmedia.dto.MediaUpload
+import ru.netology.nmedia.error.ApiError
 import ru.netology.nmedia.viewmodel.SignUpViewModel
 
 class SignUpFragment : Fragment() {
@@ -78,6 +79,7 @@ class SignUpFragment : Fragment() {
                     textError.text = getString(R.string.passwords_dont_match)
                     textError.visibility = View.VISIBLE
                 } else {
+
                     textError.visibility = View.GONE
                     val name = editName.text.toString()
                     val login = editLogin.text.toString()
@@ -85,30 +87,42 @@ class SignUpFragment : Fragment() {
                     val avatarUri = viewModel.photo.value?.uri
                     if (avatarUri != null) {
                         lifecycleScope.launch {
-                            val user = viewModel.setNewUserWithPhoto(
-                                login,
-                                pass,
-                                name,
-                                MediaUpload(avatarUri.toFile())
-                            )
-                            viewModel.removePhoto()
-                            AppAuth.getInstance().setAuth(user.id, user.token!!)
-                            findNavController().navigateUp()
+                            try {
+                                val user = viewModel.setNewUserWithPhoto(
+                                    login,
+                                    pass,
+                                    name,
+                                    MediaUpload(avatarUri.toFile())
+                                )
+                                viewModel.removePhoto()
+                                AppAuth.getInstance().setAuth(user.id, user.token!!)
+                                findNavController().navigateUp()
+                            } catch (e: ApiError) {
+                                if (e.status == ApiError.USER_NOT_FOUND) {
+                                    textError.text = getString(R.string.loginIsTaken)
+                                    textError.visibility = View.VISIBLE
+                                }
+                            }
                         }
                     } else {
                         lifecycleScope.launch {
-                            val user = viewModel.setNewUserNoPhoto(login, pass, name)
-                            AppAuth.getInstance().setAuth(user.id, user.token!!)
-                            findNavController().navigateUp()
+                            try {
+                                val user = viewModel.setNewUserNoPhoto(login, pass, name)
+                                AppAuth.getInstance().setAuth(user.id, user.token!!)
+                                findNavController().navigateUp()
+                            } catch (e: ApiError) {
+                                if (e.status == ApiError.USER_NOT_FOUND) {
+                                    textError.text = getString(R.string.loginIsTaken)
+                                    textError.visibility = View.VISIBLE
+                                }
+                            }
                         }
                     }
                 }
-
             }
         }
         return binding.root
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

@@ -43,4 +43,6 @@
     <string name="name">Имя</string>
     <string name="password_confirm">Подтверждение пароля</string>
     <string name="passwords_dont_match">Пороли не совпадают</string>
+    <string name="incorrectLoginOrPassword">Неверный логин или пароль</string>
+    <string name="loginIsTaken">Логин уже занят</string>
 </resources>
